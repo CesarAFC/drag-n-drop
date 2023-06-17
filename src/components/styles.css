@@ -68,6 +68,8 @@
     cursor: pointer;
 }
 
+
+
 @media (width <= 700px) {
     .input {
         width: 95%;
