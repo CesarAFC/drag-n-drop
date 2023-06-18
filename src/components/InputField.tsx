@@ -4,7 +4,7 @@ import './styles.css'
 interface PropsInput {
     todo: string
     setTodo: React.Dispatch<React.SetStateAction<string>>
-    handleAdd: (e: React.FormEvent<HTMLFormElement>) => void
+    handleAdd: (todo: string) => void
 }
 
 // const InputField = ({todo, setTodo}: Propsinput) => {
@@ -13,7 +13,8 @@ const InputField: React.FC<PropsInput> = ({todo, setTodo, handleAdd}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        handleAdd(e)
+        e.preventDefault()
+        handleAdd(todo)
         // To change the focus back to the document
         inputRef.current?.blur()
     }

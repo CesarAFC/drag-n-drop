@@ -1,9 +1,9 @@
 import { useReducer, useState } from 'react'
 import './App.css'
 import InputField from './components/InputField'
-// import { Todo } from './model';
 import TodoList from './components/TodoList';
 import { taskReducer } from './reducer/taskReducer';
+import { Todo } from './model';
 
 
 function App() {
@@ -11,10 +11,11 @@ function App() {
   // const [todos, setTodos] = useState<Todo[]>([])
   // const [todos, setTodos] = useState<Array<Todo>>([]);
   const [state, dispatch] = useReducer(taskReducer, []);
+  const [completedTodo, setCompletedTodo] = useState<Todo[]>([])
 
   
-  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleAdd = () => {
+    // e.preventDefault();
     if (todo) {
       dispatch({type:'add', payload: todo})
       setTodo('')
@@ -34,6 +35,7 @@ function App() {
     dispatch({type:'edit', payload: {id, newTodoV: newVersion }})
   }
 
+  console.log(state)
   return (
     <>
       <header className="App">
@@ -41,10 +43,12 @@ function App() {
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd}  />
         <TodoList 
           todos={state} 
-          // setTodos={setTodos} 
+          setTodos={handleAdd} 
           handleDone={handleDone}
           handleRemove={handleRemove} 
           handleEdit={handleEdit}
+          completedTodo={completedTodo}
+          setCompletedTodo={setCompletedTodo}
         />
       </header>
     </>
